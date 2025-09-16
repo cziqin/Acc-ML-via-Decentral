@@ -56,16 +56,6 @@ Ensure that each dataset is downloaded and placed in its corresponding directory
    ```
    >**Note:** The results about the smoothness constants are saved in the Julia REPL.
    
-### Experimental results
-<div style="text-align:center">
-  <img src="./figures/Logistic.png" alt="Fig3" width="900">
-</div>
-
-<b>Result discussion:</b> Comparison of Algorithm 1 with its centralized counterpart (labeled GD) using the W8A dataset.
-
-- <b>Fig. a and Fig. c</b> compare the convergence performance between the centralized approach (labeled GD) and its decentralized version under three partition schemes for the entire data, labeled Algorithm 1 (by labels), Algorithm 1 (by norms), and Algorithm 1 (by eigenvalues), respectively. The results show that in all data partition schemes, using  decentralization substantially reduces the number of iterations required to reach a certain accuracy level.
-- <b>Fig. b</b> plots the resulting smoothness constants under the three partition schemes, respectively, where on the x-axis, "C" represents the smoothness constant of the entire dataset (used in the centralized case), and $D_1$ and $D_2$ represent the smoothness constants for device 1 and device 2, respectively. 
-
 ## Handwritten Digits Classification on MNIST
 1. First, you can use the following command to compute the smoothness constant:
    ```shell
@@ -87,16 +77,6 @@ Ensure that each dataset is downloaded and placed in its corresponding directory
      ```shell
    python main.py --test_num 1 --epochs 1000 --agents 5 --dataset mnist --switch-interval 5 --seed 42
    ```
-### Experimental results
-<div style="text-align:center">
-  <img src="./figures/MNIST.png" alt="Fig3" width="900">
-</div>
-
-<b>Result discussion:</b> Comparison of Algorithm 1 with its centralized counterpart (labeled GD) using the MNIST dataset.  In this experiment, both algorithms use full-batch gradient computation: the centralized approach processes the entire dataset, while in the decentralized approach, each device computes gradients using all the data allocated to it.
-
-- <b>Fig. a</b> shows that the decentralized approach achieves faster convergence than the centralized counterpart in terms of training loss, training accuracy, and test accuracy. 
-- <b>Fig. b</b> compares the training loss over eight runs with different estimated smoothness constants and random initializations.
-- <b>Fig. c</b> illustrates the estimated smoothness constants alongside the training loss trajectories of three selected runs from the eight. On the x-axis representing the device index, the label "C" denotes the centralized case, and $D_1$ through $D_5$ represent the devices in the decentralized case.
 
 ## Image Classification on CIFAR-10
 1. First, you can use the following command to compute the smoothness constant:
@@ -119,16 +99,6 @@ Ensure that each dataset is downloaded and placed in its corresponding directory
      ```shell
    python main.py --test_num 1 --epochs 150 --batch_size 1 --agents 10 --dataset cifar10 --switch-interval 5 --seed 30
    ```
-### Experimental results
-<div style="text-align:center">
-  <img src="./figures/CIFAR10.png" alt="Fig4" width="900">
-</div>
-
-<b>Result discussion:</b> Comparison of Algorithm 1 with its centralized counterpart (labeled GD) using the CIFAR-10 dataset.  In this experiment, both algorithms use mini-batch gradient computation: in each iteration, the centralized approach processes ten randomly selected samples, while each device in the decentralized approach  computes gradients using one sample from the data allocated to it (so both approaches process the same number of ten samples in each iteration).
-
-- <b>Fig. a</b> shows that the decentralized approach achieves faster convergence than the centralized counterpart in terms of training loss, training accuracy, and test accuracy.
-- <b>Fig. b</b> compares the training loss over eight runs with different estimated smoothness constants and random initializations.
-- <b>Fig. c</b> illustrates the estimated smoothness constants alongside the training loss trajectories of three selected runs from the eight. On the x-axis representing the device index, the label "C" denotes the centralized case, and $D_1$ through $D_{10}$ represent the devices in the decentralized case.
 
 ## Conclusions
 This repository provides code for implementing our algorithms and Gradient Descent (GD) in three typical machine learning applications: logistic regression on the W8A dataset, handwritten digits classification on the MNIST dataset, and image classification on the CIFAR-10 dataset. All experimental results confirm that decentralization can accelerate the convergence of optimization algorithms. 
